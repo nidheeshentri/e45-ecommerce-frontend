@@ -1,13 +1,31 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 
 function ProductDetails() {
+  const {id} = useParams()
+  const [product, setProduct] = useState({})
+  console.log(id)
+
+  useEffect(()=>{
+    axios.get(`http://localhost:3000/products/${id}`)
+    .then(res => {
+      setProduct(res.data)
+    })
+    .catch(err => {
+      alert(err.response.data.message)
+      console.log(err)
+    })
+  }, [])
+
   return (
     <>
-        <img src = "https://i5.walmartimages.com/seo/LENOVO-82N4002HUS-15-6-FHD-Celeron-N4500-1-1GHz-Intel-UHD-Graphics-4GB-RAM-64GB-SSD-Chrome-OS-Artic-Grey_65c06a0f-6e73-40f1-8cef-688f92fb586e.8c06b111c1d2fc659d1eb75c41e0c57d.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF" />
+        <img src = {product.image} />
         <div>
-            <p className = "product-title">Product1</p>
-            <p className = "product-price">$1500</p>
+            <p className = "product-title">{product.title}</p>
+            <p className = "product-price">${product.price}</p>
             <Link to = "/cart" className='btn2'>Add to cart</Link>
         </div>
     </>
