@@ -22,9 +22,7 @@ function ProductList() {
         <div className='product-list'>
             {products.map((product, index) => {
                 return(
-                    <Link to = {`/product-details/${product._id}`} key = {index}>
-                        <ProductCard product = {product}/>
-                    </Link>
+                    <ProductCard product = {product} key = {index}/>
                 )
             })}
         </div>
