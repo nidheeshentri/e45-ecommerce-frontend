@@ -7,7 +7,10 @@ function Root() {
     <div className='container'>
         <header className = "header">
             <h1>Header</h1>
-            <Link to = "/login">Login</Link>
+            <div>
+              <Link to = "/cart" className='nav-link'>Cart (10)</Link>
+              <Link to = "/login" className='nav-link'>Login</Link>
+            </div>
         </header>
         <Outlet />
         <footer>
