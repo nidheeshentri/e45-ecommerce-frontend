@@ -2,7 +2,10 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+
 function Cart() {
+    const apiLink = import.meta.env.VITE_API_LINK
+    console.log(apiLink);  // "https://api.example.com"
     const [cartItems, setCartItems] = useState([])
     const [countUpdated, setCountUpdated] = useState(true)
 
@@ -13,7 +16,7 @@ function Cart() {
                 Authorization: token
             }
         }
-        axios.get("http://localhost:3000/cart/", config)
+        axios.get(apiLink+"/cart/", config)
         .then(res => {
             setCartItems(res.data.cartItems)
             console.log(res.data.cartItems)
@@ -38,7 +41,7 @@ function Cart() {
             count: count,
             cartItemId: id
         }
-        axios.post("http://localhost:3000/cart/update-count", data, config)
+        axios.post(apiLink+"/cart/update-count", data, config)
         .then(res => {
             getCartData()
         })

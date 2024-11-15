@@ -14,6 +14,8 @@ import Checkout from './pages/Checkout';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Order from './pages/Orders';
+import dotenv from "dotenv"
+
 
 const router = createBrowserRouter([
   {
