@@ -15,6 +15,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Order from './pages/Orders';
 import dotenv from "dotenv"
+import AddProduct from './pages/AddProduct';
 
 
 const router = createBrowserRouter([
@@ -50,12 +51,14 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      {
+        path: "/add-product",
+        element: <AddProduct />,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>,
 )

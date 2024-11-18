@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 function ProductCard(props) {
+  const apiLink = import.meta.env.VITE_API_LINK
   const navigate = useNavigate()
   const addToCart = () => {
     let token = localStorage.getItem("token")
@@ -23,7 +24,7 @@ function ProductCard(props) {
   return (
     <>
         <div className='product-card'>
-            <img src = {props.product.image} />
+            <img src = {`${apiLink}/${props.product.image}`} />
             <div className='product-details'>
               <Link to = {`/product-details/${props.product._id}`}>
                 <p className = "product-title">{props.product.title}</p>

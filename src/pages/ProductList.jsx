@@ -3,7 +3,9 @@ import ProductCard from '../components/ProductCard'
 import { Link } from 'react-router-dom'
 import axios from "axios"
 
+
 function ProductList() {
+    const apiLink = import.meta.env.VITE_API_LINK
   const [products, setProducts] = useState([])
   useEffect(() => {
     axios.get("http://localhost:3000")
