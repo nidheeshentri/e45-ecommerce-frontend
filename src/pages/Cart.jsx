@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Cookies from 'universal-cookie';
 
 
 function Cart() {
@@ -14,7 +15,8 @@ function Cart() {
         const config = {
             headers: {
                 Authorization: token
-            }
+            },
+            withCredentials: true
         }
         axios.get(apiLink+"/cart/", config)
         .then(res => {
@@ -22,6 +24,30 @@ function Cart() {
             console.log(res.data.cartItems)
         })
         .catch(err => {
+            const token = localStorage.getItem("refresh")
+            const config = {
+                headers: {
+                    Authorization: token
+                }
+            }
+            axios.get(apiLink+"/user/get-access-token", config)
+            .then(res => {
+                console.log(res.data)
+                localStorage.setItem("token", res.data.token)
+                const config = {
+                    headers: {
+                        Authorization: res.data.token
+                    }
+                }
+                axios.get(apiLink+"/cart/", config)
+                .then(res => {
+                    setCartItems(res.data.cartItems)
+                    console.log(res.data.cartItems)
+                })
+            })
+            .catch(()=>{
+                navigator("/login")
+            })
             console.log(err.response)
         })
     }

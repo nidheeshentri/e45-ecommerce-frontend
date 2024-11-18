@@ -13,6 +13,7 @@ function Login() {
     axios.post("http://localhost:3000/user/login", data)
     .then(res => {
       localStorage.setItem("token", res.data.token)
+      localStorage.setItem("refresh", res.data.refresh)
       navigate("/")
     })
     .catch(err => {
